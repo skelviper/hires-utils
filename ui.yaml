@@ -1,0 +1,36 @@
+# id: function:arguments, id...
+argparse: # base, don't need function to create
+  parser:
+    - ArgumentParser: #func
+        prog: hires
+        description: Functions for hires pipline
+    - subcommands:
+      - add_subparsers: #func
+          title: These are sub-commands
+          metacar: command
+      - clean_leg_arg: 
+        - add_parser: #func
+          - clean_leg
+          - help: clean promiscuous legs that contacts with multiple legs
+        - set_defaults: #func, can be set in init
+          handle: filenames
+        - #anonymous object
+          - add_argument: #func
+            - "-d"
+            - "--distance"
+            - type: int
+            - dest: max_distance
+            - metavar: MAX_DISTANCE
+            - action: store
+            - default: 1000
+            - help: max distance to calculate ajacent legs
+        - #anonymous object
+          - add_argument: #func
+            - "-n"
+            - "--count"
+            - metavar: MAX_COUNT
+            - dest: max_count
+            - type: int
+            - action: store
+            - default: 10
+            - help: number threshold of adjacent legs
